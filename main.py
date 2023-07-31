@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QWidget, QFrame,QPushButton,QVBoxLayout
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QScreen
-from login import LoginForm
+from login_new import LoginForm
 
 import sys
 
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     frame2.setStyleSheet("background-color:#D9D9D9;")
 
     #window.setStyleSheet("background-color: #95a5a6")
-    login=LoginForm("./gridraster.png")
+    login=LoginForm("./sample.png")
     layout=QVBoxLayout()
     frame2.setLayout(layout)
     layout.addWidget(login)

@@ -51,7 +51,7 @@ class TitleBar(QWidget):
         #self.settingButton.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
         self.settingButton.setStyleSheet("""
                                             border:none;
-                                            background-color:#1F1F1""")
+                                            background-color:rgb(31,31,31)""")
 
 
         #Let's create a seprate QLabel for title and 
@@ -83,7 +83,7 @@ class TitleBar(QWidget):
 
         self.setAutoFillBackground(True)
         palette = self.palette()
-        palette.setColor(self.backgroundRole(), QColor("#1F1F1F"))  # Set black color
+        palette.setColor(self.backgroundRole(), QColor(31,31,31))  # Set black color
         self.setPalette(palette)
 
 class MainWindow(QMainWindow):

@@ -1,6 +1,8 @@
-from PySide6.QtWidgets import QVBoxLayout,QFrame,QLabel,QLineEdit,QPushButton,QHBoxLayout,QSpacerItem,QSizePolicy,QApplication,QMainWindow
+from PySide6.QtWidgets import QVBoxLayout,QFrame,QLabel,QLineEdit,QPushButton,QHBoxLayout,QSpacerItem,QSizePolicy,QApplication,QMainWindow,QWidget
 import PySide6.QtGui  as QtGui
+from ClickableText import ClickableText
 from PySide6.QtCore import Qt,QSize
+import sys
 
 class LoginForm(QFrame):
     def __init__(self, logo_path=None, parent=None):
@@ -90,6 +92,22 @@ class LoginForm(QFrame):
         self.password_layout.addWidget(self.password_entry)
 
         
+        #before login button we new forgot password 
+        self.forgot_password_layout=QHBoxLayout()
+        self.forgot_password_spacer=QSpacerItem(0,0,QSizePolicy.Expanding,QSizePolicy.Fixed)
+        self.forgot_password_spacer_left=QSpacerItem(62,0,QSizePolicy.Fixed,QSizePolicy.Fixed)
+        self.forgot_password=ClickableText(text="Forgot Password ?",color="red")
+        self.forgot_password.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.forgot_password_layout.addItem(self.forgot_password_spacer)
+        
+        self.forgot_password_layout.addWidget(self.forgot_password)
+        self.forgot_password_layout.addItem(self.forgot_password_spacer_left)
+        #self.forgot_password_layout.addItem(self.forgot_password_spacer)
+        
+
+
+
+
         #let's start(Login)Button 
         self.login_button = QPushButton("Login")
         self.login_button.clicked.connect(self.on_login_button_click)
@@ -100,28 +118,35 @@ class LoginForm(QFrame):
         #self.size1=QSize(100,100)
         self.spacerItem1=QSpacerItem(0,0,QSizePolicy.Expanding,QSizePolicy.Expanding)
         self.spacerItem2=QSpacerItem(0,0,QSizePolicy.Expanding,QSizePolicy.Expanding)
+
+
+
+
+        
         
         
         #add them to layout 
-        self.layout = QVBoxLayout()
+        self.layout1 = QVBoxLayout()
+        #self.layout1.addItem(self.spacerItem1)
+        self.layout1.addLayout(self.heading_layout)
+        self.layout1.addItem(self.vertical_spacerItem1)
+        self.layout1.addWidget(self.Login_label,alignment=Qt.AlignCenter)
+        self.layout1.addItem(self.vertical_spacerItem2)
+        self.layout1.addLayout(self.username_layout)
+        self.layout1.addItem(self.vertical_spacerItem2)
+        self.layout1.addLayout(self.password_layout)
+        self.layout1.addItem(self.vertical_spacerItem2)
+        self.layout1.addLayout(self.forgot_password_layout)
+        self.layout1.addLayout(self.button_layout)
+        
         #self.layout.addItem(self.spacerItem1)
-        self.layout.addLayout(self.heading_layout)
-        self.layout.addItem(self.vertical_spacerItem1)
-        self.layout.addWidget(self.Login_label,alignment=Qt.AlignCenter)
-        self.layout.addItem(self.vertical_spacerItem2)
-        self.layout.addItem(self.username_layout)
-        self.layout.addItem(self.vertical_spacerItem2)
-        self.layout.addItem(self.password_layout)
-        self.layout.addItem(self.vertical_spacerItem3)
-        self.layout.addLayout(self.button_layout)
-        #self.layout.addItem(self.spacerItem1)
-        self.layout.addStretch(0)
+        self.layout1.addStretch(0)
         
         self.login_button.setMaximumHeight(40)
         self.login_button.setMaximumWidth(100)
        
         
-        self.setLayout(self.layout)    
+        self.setLayout(self.layout1)    
     def on_login_button_click(self):
         # Add your login functionality here
         username = self.username_entry.text()
@@ -129,14 +154,32 @@ class LoginForm(QFrame):
         print(f"Username: {username}, Password: {password}")
 
 #this is running main functionality just for checking 
-
 if __name__=="__main__":
-    app=QApplication()
+    app=QApplication(sys.argv)
     window=QMainWindow()
+    widget=QWidget()
+    window.setCentralWidget(widget)
+    
     frame=LoginForm("./sample.png")
-    window.setCentralWidget(frame)
-    #frame.setStyleSheet("""
-                          # background-color:blue;""")
-    window.show()
-    app.exec()
+    
+    layout_vertical=QVBoxLayout()
+    layout_horizontal=QHBoxLayout()
+    widget.setLayout(layout_vertical)
+    spacer_up=QSpacerItem(0,0,QSizePolicy.Fixed,QSizePolicy.Expanding)
+    #spacer_down=QSpacerItem(0,0,QSizePolicy.Fixed,QSizePolicy.Expanding)
+    spacer_left=QSpacerItem(0,0,QSizePolicy.Expanding,QSizePolicy.Fixed)
+    #spacer_right=QSpacerItem(0,0,QSizePolicy.Expanding,QSizePolicy.Fixed)
+    layout_vertical.addItem(spacer_up)
+    layout_vertical.addLayout(layout_horizontal)
+    layout_horizontal.addItem(spacer_left)
+    layout_horizontal.addWidget(frame)
+    layout_horizontal.addItem(spacer_left)
+    layout_vertical.addItem(spacer_up)
 
+
+
+    frame.setStyleSheet("""
+                          background-color:#3498db;""")
+    
+    window.show()
+    sys.exit(app.exec())

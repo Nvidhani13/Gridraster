@@ -1,3 +1,1 @@
-# Gridraster1 31
-asdasdasdasd
-kkfklfklfk
+code for 3d scanner app

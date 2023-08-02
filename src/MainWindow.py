@@ -2,6 +2,7 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtGui import QGuiApplication
 from titlebar import TitleBar
+from PySide6.QtCore import Qt
 
 class GridRaster(QMainWindow):
     def __init__(self):
@@ -17,6 +18,7 @@ class GridRaster(QMainWindow):
 
         # Set the main window size to fit the screen
         self.resize(screen_geometry.width() , screen_geometry.height() )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowMaximizeButtonHint)  # Remove the maximize button
         title_bar = TitleBar()
         self.setMenuWidget(title_bar)
 

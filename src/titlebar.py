@@ -12,7 +12,7 @@ class TitleBar(QWidget):
 
         # Add the image to the title bar
         self.image_label = QLabel(self)
-        pixmap = QPixmap("LogoTitleBar.png")  # Load the image
+        pixmap = QPixmap("..//Resources//LogoTitleBar.png")  # Load the image
         self.image_label.setPixmap(pixmap)
         self.image_label.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
         self.image_label.setMinimumHeight(52)
@@ -45,7 +45,7 @@ class TitleBar(QWidget):
         self.window_name_layout.addItem(self.spacer2)
         self.window_name_layout.addWidget(self.MeshVisualiser)
 
-        self.settingsIcon = QIcon("./setting.png") 
+        self.settingsIcon = QIcon("..//Resources//setting.png") 
         self.settingButton=QPushButton()
         self.settingButton.setIcon(self.settingsIcon)
         #self.settingButton.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
